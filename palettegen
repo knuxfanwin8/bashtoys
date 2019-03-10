@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# palettegen - 2019-03-10 by knuxify
 # I randomly decided to make a program that generates 
 # infinite gradients, that randomly switch from color 
 # to color. While I did not achieve that, what came 
