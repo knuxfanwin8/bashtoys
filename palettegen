@@ -24,14 +24,14 @@ printcol() {
     b="100"
 		until [ "$r" -eq "$oldr" ]; do
 			if [ "$r" -gt "$oldr" ]; then let r--; else let r++; fi
-			printcol " $r, $g, $b "
+			printcol "[ $r, $g, $b ]"
 		done
 		until [ "$g" -eq "$oldg" ]; do
 			if [ "$g" -gt "$oldg" ]; then let g--; else let g++; fi
-			printcol " $r, $g, $b "
+			printcol "[ $r, $g, $b ]"
 		done
 		until [ "$b" -eq "$oldb" ]; do
 			if [ "$b" -gt "$oldb" ]; then let b--; else let b++; fi
-			printcol " $r, $g, $b "
+			printcol "[ $r, $g, $b ]"
 		done
 echo ""
