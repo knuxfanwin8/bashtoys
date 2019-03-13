@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# demanjaroify by knuxify - work began on 2019-03-10
+# script to replace manjaro with arch without reinstalling
+# inspired by the r/unixporn discord server
+
+# Replace system information

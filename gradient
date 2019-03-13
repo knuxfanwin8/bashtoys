@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# gradient - 2019-03-13 by knuxify
+# clone of palettegen that generates better gradients. use switch --codes to see color codes
+
+args="$*"
+echo ""
+MAX=256
+r=$(( ( RANDOM % $MAX )  + 1 ))
+    g=$(( ( RANDOM % $MAX )  + 1 ))
+    b=$(( ( RANDOM % $MAX )  + 1 ))
+printcol() {
+	if [[ "$args" = *"--codes"* ]]; then
+		printf "\x1b[48;2;$r;$g;${b}m$1\x1b[0m"
+	else
+		printf "\x1b[48;2;$r;$g;${b}m \x1b[0m"
+	fi
+}
+oldr="$r"
+oldg="$g"
+oldb="$b"
+newr=$(( ( RANDOM % $MAX )  + 1 ))
+newg=$(( ( RANDOM % $MAX )  + 1 ))
+newb=$(( ( RANDOM % $MAX )  + 1 ))
+r="$newr"
+g="$nevg"
+b="$newb"
+until [ "$g" -eq "$newg" ]&>/dev/null && [ "$r" -eq "$newr" ] && [ "$b" -eq "$newb" ]; do
+	if ! [ "$r" -eq "$newr" ]; then
+		if [ "$r" -gt "$oldr" ]; then let r--; else let r++; fi
+		printcol "[ $r, $g, $b ]"
+	fi
+	if ! [ "$g" -eq "$newg" ]&>/dev/null; then
+		if [ "$newg" -gt "$oldg" ]; then let g++; else let g++; fi
+		printcol "[ $r, $g, $b ]"
+	fi
+	if ! [ "$b" -eq "$newb" ]; then
+		if [ "$newb" -gt "$oldb" ]; then let b--; else let b++; fi
+		printcol "[ $r, $g, $b ]"
+	fi
+done
+echo ""
