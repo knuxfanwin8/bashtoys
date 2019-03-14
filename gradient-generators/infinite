@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# infinite - 2019-03-13 by knuxify
+# clone of generate that generates infinite gradients. use switch --codes to see color codes
+
+args="$*"
+echo ""
+MAX=255
+newr=$(( ( RANDOM % $MAX )  + 1 ))
+newg=$(( ( RANDOM % $MAX )  + 1 ))
+newb=$(( ( RANDOM % $MAX )  + 1 ))
+r="$newr"
+g="$newg"
+b="$newb"
+echo "$r $g $b"
+printcol() {
+	if [[ "$args" = *"--codes"* ]]; then
+		printf "\x1b[48;2;$r;$g;${b}m$1\x1b[0m"
+	else
+		printf "\x1b[48;2;$r;$g;${b}m \x1b[0m"
+	fi
+}
+while true; do
+oldr="$r"
+oldg="$g"
+oldb="$b"
+newr=$(( ( RANDOM % $MAX )  + 1 ))
+newg=$(( ( RANDOM % $MAX )  + 1 ))
+newb=$(( ( RANDOM % $MAX )  + 1 ))
+until [ "$g" -eq "$newg" ] && [ "$r" -eq "$newr" ] && [ "$b" -eq "$newb" ]; do
+	if ! [ "$r" -eq "$newr" ]; then
+		if [ "$newr" -lt "$oldr" ]; then let r--; else let r++; fi
+		printcol "[ $r, $g, $b ]"
+	fi
+	if ! [ "$g" -eq "$newg" ]&>/dev/null; then
+		if [ "$newg" -lt "$oldg" ]; then let g--; else let g++; fi
+		printcol "[ $r, $g, $b ]"
+	fi
+	if ! [ "$b" -eq "$newb" ]; then
+		if [ "$newb" -lt "$oldb" ]; then let b--; else let b++; fi
+		printcol "[ $r, $g, $b ]"
+	fi
+done
+done
